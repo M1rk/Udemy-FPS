@@ -14,4 +14,13 @@ class UDEMYFPS_API UChooseNextWaypoint : public UBTTaskNode
 {
 	GENERATED_BODY()
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+ protected:
+ UPROPERTY(EditAnywhere, Category = "BlackBoard")
+ FBlackboardKeySelector IndexKey;
+ UPROPERTY(EditAnywhere, Category = "BlackBoard")
+ FBlackboardKeySelector  WaypointKey;
+private:
+	UPROPERTY()
+	int32 Index = 0;
+ 
 };
