@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+
 #include "FirstPersonCharacter.generated.h"
 
 class UInputComponent;
@@ -50,7 +51,7 @@ public:
 
 protected:
 	virtual void BeginPlay();
-
+	void OnFire();
 public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -64,27 +65,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
 	FVector GunOffset;
 
-	/** Projectile class to spawn */
-	UPROPERTY(EditDefaultsOnly, Category=Projectile)
-	TSubclassOf<class AUdemyFPSProjectile> ProjectileClass;
-
-	/** Sound to play each time we fire */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
-	class USoundBase* FireSound;
-
-	/** AnimMontage to play each time we fire */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	class UAnimMontage* FireAnimation;
-
 	/** Whether to use motion controller location for aiming. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	uint32 bUsingMotionControllers : 1;
 
+	/** Gun class to spawn*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gun)
+	TSubclassOf<class AGun> GunBlueprint;
+	UInputComponent* IntermidiateInputComponent;
+	AGun* Gun;
+
 protected:
 	
-	/** Fires a projectile. */
-	void OnFire();
-
+	
 	/** Resets HMD orientation and position in VR. */
 	void OnResetVR();
 
